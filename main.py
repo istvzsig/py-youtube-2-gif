@@ -1,35 +1,31 @@
 from pytube import YouTube
 from moviepy.editor import *
-# import asyncio
-# import websockets
 
-class YOUTUBE(object):
+# OBJECT FOR YOUTUBE VIDEO
+class YOUTUBE:
     @staticmethod
     def download(video_url=None):
-        if not video_url: return
+        if not video_url: return # guardian
+
+        # get first youtube video by url
         return (YouTube(video_url).streams
             .filter(progressive=True,
                     file_extension='mp4')
-            .first()
-            .download())
+            .first() # get the best result
+            .download()) # download video to root dir
     @staticmethod
     def rename():
         pass
 
-class GIF(object):
+# OBJECT FOR CREATE GIFS
+class GIF:
     @staticmethod
-    def it(video_url=None):
-        if not video_url: return
+    def it(video_url=None) -> []:
+        if not video_url: return # guardian
+        # object from video file
         clip = (VideoFileClip(video_url)
             .subclip((33),(36))
             .resize(.2))
 
+        # render the gif
         clip.write_gif('converted.gif')
-
-if __name__ == '__main__':
-    try:
-        pass
-        # (YOUTUBE.download('https://youtu.be/ACp0zmWJXBg'),
-        # GIF.it('NEW SIZE! Shadow Rap Jack Deep 07 I Rapala®.mp4')
-    except Exception as e:
-        print(e)
