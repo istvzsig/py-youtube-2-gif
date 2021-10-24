@@ -26,9 +26,9 @@ def home():
             YOUTUBE.download(url)
             print('='*100)
             print('Video from url', url, 'downloaded.')
-
-            GIF.it('React in 100 Seconds.mp4')
             print('='*100)
+            GIF.it('React in 100 Seconds.mp4')
+
             print('video converted')
             print('='*100)
         except Exception as e:
