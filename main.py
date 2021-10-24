@@ -1,31 +1,44 @@
-from pytube import YouTube
-from moviepy.editor import *
+import asyncio
+import json
+from flask import Flask, render_template, request, redirect, url_for
+from mods.yt import YOUTUBE
+from mods.gif import GIF
 
-# OBJECT FOR YOUTUBE VIDEO
-class YOUTUBE:
-    @staticmethod
-    def download(video_url=None):
-        if not video_url: return # guardian
+app = Flask(__name__)
+# https://www.youtube.com/watch?v=Tn6-PIqc4UM
 
-        # get first youtube video by url
-        return (YouTube(video_url).streams
-            .filter(progressive=True,
-                    file_extension='mp4')
-            .first() # get the best result
-            .download()) # download video to root dir
-    @staticmethod
-    def rename():
-        pass
 
-# OBJECT FOR CREATE GIFS
-class GIF:
-    @staticmethod
-    def it(video_url=None) -> []:
-        if not video_url: return # guardian
-        # object from video file
-        clip = (VideoFileClip(video_url)
-            .subclip((33),(36))
-            .resize(.2))
+def reponse_data():
+    response = app.response_class(
+        response=json.dumps(data),
+        status=200,
+        mimetype='application/json'
+    )
 
-        # render the gif
-        clip.write_gif('converted.gif')
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        url = request.form['url']
+        print('='*100)
+        print('video url:', url)
+        print('='*100)
+        try:
+            YOUTUBE.download(url)
+            print('='*100)
+            print('Video from url', url, 'downloaded.')
+
+            GIF.it('React in 100 Seconds.mp4')
+            print('='*100)
+            print('video converted')
+            print('='*100)
+        except Exception as e:
+            print('='*100)
+            print(e)
+            print('='*100)
+
+        print("Job's done.")
+        return redirect(url_for('home'))
+    return render_template('index.html', name=None)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5555)
