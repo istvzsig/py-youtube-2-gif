@@ -1,4 +1,5 @@
-const convert_button = document.getElementById('convert_button');
+const CONVERTER = document.getElementById('convert_button');
+const GIF = document.getElementById('converted_gif');
 
 async function sendDataToPy() {
     const data = await fetch('http://localhost:5555/',
@@ -29,5 +30,4 @@ var url = document.getElementById('input_for_url');
 
 url.addEventListener('change', e => console.log(e))
 
-
-console.log(navigator)
+// console.log(navigator)

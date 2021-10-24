@@ -11,7 +11,7 @@ class YOUTUBE:
             .filter(progressive=True,
                     file_extension='mp4')
             .first() # get the best result
-            .download()) # download video into root dir
+            .download(filename='downloaded.mp4')) # download video into root dir
     @staticmethod
-    def rename():
+    def set_name():
         pass

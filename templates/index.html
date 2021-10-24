@@ -8,14 +8,22 @@
 </head>
 <body>
 
-      <h1>Youtube video to GIF</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-      <form action="/" method="post">
-            <input id="input_for_url" type="url" name="url">
-            <input id="convert_button" type="submit" value="CONVERT">
-      </form>
+      <div id="converter">
+            <h1>Video -> GIF</h1>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <form action="/" method="post">
+                  <input id="input_for_url" type="url" name="url">
+                  <input id="convert_button" type="submit" value="CONVERT">
+            </form>
+      </div>
+
+      <div id="converted_gif">
+            <img src='/static/converted.gif' alt="">
+      </div>
 
       <script src="static/app.js"></script>
 

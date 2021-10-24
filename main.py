@@ -1,33 +1,35 @@
 import asyncio
 import json
-from flask import Flask, render_template, request, redirect, url_for
+# flask
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+
+# mods dir
 from mods.yt import YOUTUBE
 from mods.gif import GIF
+from mods.manager import File
 
+# init flask app
 app = Flask(__name__)
+
 # https://www.youtube.com/watch?v=Tn6-PIqc4UM
 
-
-def reponse_data():
-    response = app.response_class(
-        response=json.dumps(data),
-        status=200,
-        mimetype='application/json'
-    )
+def process_image(imageName):
+    f = open(imageName+'.gif', 'rb')
+    print(f)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         url = request.form['url']
         print('='*100)
-        print('video url:', url)
+        print('USER SENT URL:', url)
         print('='*100)
         try:
             YOUTUBE.download(url)
             print('='*100)
             print('Video from url', url, 'downloaded.')
             print('='*100)
-            GIF.it('React in 100 Seconds.mp4')
+            GIF.it()
 
             print('video converted')
             print('='*100)
@@ -37,8 +39,10 @@ def home():
             print('='*100)
 
         print("Job's done.")
+        File.delete()
         return redirect(url_for('home'))
-    return render_template('index.html', name=None)
+    # process_image('converted')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5555)

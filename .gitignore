@@ -1,4 +1,4 @@
-/venv/
-/__pycache__/
-*.gif
+/venv
+/__pycache__
+
 *.mp4
