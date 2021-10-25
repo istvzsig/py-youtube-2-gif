@@ -34,9 +34,7 @@ p { line-height: 1.5; }
       /* margin: 1rem 0; */
 }
 
-#converter * {
-      margin: 1rem 0;
-}
+#converter * { margin: 1rem 0; }
 
 
 #input_for_url, #convert_button {
@@ -46,7 +44,8 @@ p { line-height: 1.5; }
       /* background: rgba(0,0,0,.1); */
       /* border: 2px solid black; */
       background: red;
-      transition: 300ms all cubic-bezier(.17,.67,.83,.67);
+      /* transition: 300ms all cubic-bezier(.17,.67,.83,.67); */
+      transition: 300ms all ease;
       border-radius: 1rem;
 }
 

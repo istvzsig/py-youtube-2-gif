@@ -1,8 +1,14 @@
-const CONVERTER = document.getElementById('convert_button');
-const GIF = document.getElementById('converted_gif');
+const converter_button = document.getElementById('convert_button');
+const gif = document.getElementById('converted_gif');
 
-async function sendDataToPy() {
-    const data = await fetch('http://localhost:5555/',
+function saveLastUrl(url=null) {
+      return url ?
+            localStorage.setItem('last-converted', url)
+                  : `URL is ${url}`;
+}
+
+async function handleData(data={}) {
+    return await fetch('http://localhost:5555/',
         {
             method: 'POST',
             mode: 'cors',
@@ -13,21 +19,19 @@ async function sendDataToPy() {
             },
             redirect: 'manual',
             referrerPolicy: 'no-referrer',
-            body: JSON.stringify({url:'url'})
+            body: JSON.stringify({data:
+                  {
+
+                  }
+
+            })
         });
-
-        return
 }
-
-// convert_button.addEventListener('click', e => {
-//
-// })
-
 
 var url = document.getElementById('input_for_url');
 // data = url.length > 0 ? url : false;
-// data ? sendDataToPy() : false;
+// data ? handleData() : false;
 
-url.addEventListener('change', e => console.log(e))
-
-// console.log(navigator)
+converter_button.addEventListener('click', e => {
+      saveLastUrl();
+})
