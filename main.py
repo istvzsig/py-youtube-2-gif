@@ -12,6 +12,7 @@ from mods.manager import File
 app = Flask(__name__)
 
 # https://www.youtube.com/watch?v=Tn6-PIqc4UM
+# https://www.youtube.com/watch?v=kWsG2cIOvGk?start=22&end=25
 
 def process_image(imageName):
     f = open(imageName+'.gif', 'rb')
@@ -21,16 +22,19 @@ def process_image(imageName):
 def home():
     if request.method == 'POST':
         url = request.form['url']
+        # start_time = request.form['start']
+        duration = 3 # hard coded
+        start_time = 22 # hard coded
+        end_time = start_time + duration
         print('='*100)
         print('USER SENT URL:', url)
         print('='*100)
         try:
-            YOUTUBE.download(url)
-            print('='*100)
+            yt = YOUTUBE.download(url) # download video
+            # YOUTUBE.video(yt)
             print('Video from url', url, 'downloaded.')
             print('='*100)
-            GIF.it()
-
+            GIF.it() # create gif
             print('video converted')
             print('='*100)
         except Exception as e:
@@ -39,7 +43,7 @@ def home():
             print('='*100)
 
         print("Job's done.")
-        File.delete()
+        # File.delete()
         return redirect(url_for('home'))
     # process_image('converted')
     return render_template('index.html')

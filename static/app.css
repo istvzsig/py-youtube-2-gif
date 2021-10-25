@@ -107,7 +107,8 @@ p { line-height: 1.5; }
 #converted_gif {
       width: 100%;
       height: 100%;
-      position: fixed;
+      position: relative;
+      text-align: center;
       top: 0;
       left: 0;
       background: honey;
